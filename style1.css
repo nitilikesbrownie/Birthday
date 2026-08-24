@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow-x: hidden;
+    background-image: url("background.jpg");
+    background-size: auto;
+    background-repeat: repeat;
+    position: relative;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* subtle wash so text stays legible over the busy pattern */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- ambient floating hearts ---------- */
+
+.hearts-bg {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hearts-bg span {
+    position: absolute;
+    bottom: -10%;
+    font-size: 20px;
+    opacity: 0;
+    animation: float-up linear infinite;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.55;
+    }
+
+    90% {
+        opacity: 0.35;
+    }
+
+    100% {
+        transform: translateY(-110vh) translateX(var(--drift, 20px)) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- content ---------- */
+
+.birthday-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(14px, 4vw, 30px);
+    width: min(92vw, 640px);
+    z-index: 9999;
+    animation: settle-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes settle-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0) scale(1);
+    }
+}
+
+.sticker {
+    width: clamp(140px, 30vw, 240px);
+    height: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 10px 18px rgba(70, 35, 45, 0.2));
+    animation: jiggle 2s ease-in-out infinite;
+}
+
+@keyframes jiggle {
+    0% {
+        transform: rotate(0deg) translateY(0);
+    }
+
+    25% {
+        transform: rotate(-3deg) translateY(-5px);
+    }
+
+    50% {
+        transform: rotate(3deg) translateY(0);
+    }
+
+    75% {
+        transform: rotate(-2deg) translateY(-3px);
+    }
+
+    100% {
+        transform: rotate(0deg) translateY(0);
+    }
+}
+
+.birthday-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.birthday-text h1.love {
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: clamp(26px, 5vw, 34px);
+    color: #CE2560;
+    margin-bottom: 5px;
+    font-weight: bolder;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+}
+
+.birthday-text h1:not(.love) {
+    font-size: clamp(28px, 5vw, 40px);
+    margin: 0;
+    color: #4A2635;
+    font-weight: 700;
+}
+
+.birthday-text h2 {
+    font-size: clamp(18px, 3.5vw, 26px);
+    margin: 5px 0 20px;
+    color: #4A2635;
+    font-weight: normal;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
+}
+
+.birthday-button {
+    display: inline-block;
+    padding: 10px 24px;
+    font-size: clamp(15px, 2vw, 16px);
+    font-family: Georgia, "Times New Roman", serif;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    background-color: #8BCF9B;
+    color: #24452B;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 6px 14px rgba(36, 69, 43, 0.22);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.birthday-button:hover {
+    background-color: #6FBA80;
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 9px 18px rgba(36, 69, 43, 0.3);
+}
+
+.birthday-button:active {
+    transform: scale(0.96);
+}
+
+.birthday-button:focus-visible {
+    outline: 3px solid rgba(36, 69, 43, 0.45);
+    outline-offset: 4px;
+}
+
+/* stack vertically once side-by-side gets cramped */
+@media (max-width: 560px) {
+    .birthday-container {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .sticker {
+        width: clamp(150px, 45vw, 210px);
+    }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+    .birthday-container {
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .sticker {
+        width: clamp(110px, 20vh, 160px);
+    }
+
+    .birthday-text h2 {
+        margin: 5px 0 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hearts-bg span,
+    .sticker,
+    .birthday-container,
+    .birthday-button {
+        animation: none !important;
+        transition: none !important;
+    }
+}

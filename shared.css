@@ -1,0 +1,104 @@
+/* ============================================================
+   shared.css
+   One small set of tokens + one nav component, reused by every
+   page in the story. Each page keeps its own colors/fonts/mood
+   (that variety is the point — six different "chapters") but
+   the motion, spacing, and corner-radius language now come from
+   one place, and every page gets the same back/forward nav.
+   ============================================================ */
+
+:root {
+    --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s var(--ease-standard);
+    --radius-pill: 999px;
+    --radius-soft: 16px;
+    --shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.22);
+    --shadow-strong: 0 10px 24px rgba(0, 0, 0, 0.3);
+    --nav-accent: #d96b83; /* overridden per page via inline style on <body> */
+}
+
+/* consistent keyboard focus ring everywhere, regardless of page palette */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--nav-accent) 55%, white 45%);
+    outline-offset: 4px;
+}
+
+/* ---------- shared page nav: back arrow (bottom-left) + progress dots ---------- */
+
+.page-nav {
+    position: fixed;
+    left: 50%;
+    bottom: clamp(14px, 3vw, 22px);
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    background: rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(6px);
+    border-radius: var(--radius-pill);
+    z-index: 999;
+    pointer-events: none; /* dots are decorative; only the back arrow (outside this bar) is clickable */
+}
+
+.page-nav .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.page-nav .dot.current {
+    background: #fff;
+    transform: scale(1.35);
+}
+
+.back-arrow {
+    position: fixed;
+    left: clamp(14px, 3vw, 26px);
+    bottom: clamp(14px, 3vw, 26px);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--nav-accent);
+    text-decoration: none;
+    box-shadow: var(--shadow-soft);
+    z-index: 999;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.back-arrow svg {
+    width: 20px;
+    height: 20px;
+}
+
+.back-arrow:hover {
+    transform: scale(1.08);
+    box-shadow: var(--shadow-strong);
+}
+
+.back-arrow:active {
+    transform: scale(0.94);
+}
+
+@media (max-width: 500px) {
+    .back-arrow {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .page-nav .dot,
+    .back-arrow {
+        transition: none !important;
+    }
+}

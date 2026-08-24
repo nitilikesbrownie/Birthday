@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#c1272d">
+<title>Happy B-Day 🎉</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="style5.css">
+<script src="script5.js" defer></script>
+<script src="nav.js" defer></script>
+</head>
+<body data-page="5" data-total="6" data-accent="#c1272d" data-prev="index4.html">
+
+<div class="board">
+  <!-- <div class="board-title">✦  ✦</div> -->
+
+  <div class="stack">
+    <div class="tape tape-tl"></div>
+
+    <div class="photo" id="photo-1"></div>
+    <div class="photo" id="photo-2"></div>
+    <div class="photo" id="photo-3"></div>
+
+    <div class="tape tape-br"></div>
+
+    <!-- doodle overlay: arrows, stars, hearts drawn like a white paint pen -->
+    <div class="doodle-layer">
+      <svg width="40" height="40" style="top:18%; left:60%;" viewBox="0 0 40 40" fill="none">
+        <path d="M20 2 L24 15 L37 15 L26 23 L30 36 L20 27 L10 36 L14 23 L3 15 L16 15 Z" fill="#fff" stroke="#1c1a17" stroke-width="1.5"/>
+      </svg>
+
+      <svg class="heart" width="34" height="34" style="top:44%; left:8%;" viewBox="0 0 34 34" fill="none">
+        <path d="M17 30 C4 21 2 13 8 8 C12 5 16 7 17 11 C18 7 22 5 26 8 C32 13 30 21 17 30 Z" fill="var(--accent)" stroke="#1c1a17" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <!-- jiggling headline text (content comes from script5.js's PAGE5_CONFIG) -->
+    <div class="jiggle-text" id="happy-bday"></div>
+
+    <!-- jiggling chrome number (value comes from script5.js's PAGE5_CONFIG.age) -->
+    <div class="chrome-number" id="age-number"></div>
+  </div>
+
+  <!-- real stickers, allowed to hang slightly off the edge of the photo stack -->
+  <div class="sticker-layer">
+    <img src="sticker2.png" class="real-sticker sticker-star-pink" alt="" aria-hidden="true">
+    <img src="sticker3.png" class="real-sticker sticker-star-red" alt="" aria-hidden="true">
+    <img src="sticker11.png" class="real-sticker sticker-cat" alt="" aria-hidden="true">
+  </div>
+
+  <div class="caption">wishing you the best day of your life  ♡ </div>
+</div>
+
+<a href="index6.html" class="next-arrow" aria-label="Continue to the next page">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor"
+            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+</a>
+
+</body>
+</html>

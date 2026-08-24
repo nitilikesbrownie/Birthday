@@ -1,0 +1,535 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background:
+        radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 80% 15%, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1.5px 1.5px at 60% 70%, rgba(255, 255, 255, 0.35), transparent),
+        radial-gradient(1px 1px at 30% 85%, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1.5px 1.5px at 90% 60%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 45% 40%, rgba(255, 255, 255, 0.35), transparent),
+        #111827;
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    position: relative;
+    width: min(90vw, 360px);
+    min-height: min(90svh, 600px);
+    background: #f596aa;
+    border: 8px solid white;
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+
+    overflow: hidden;
+    animation: settle-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes settle-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+h1 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 75px;
+    text-align: center;
+}
+
+.cake-container {
+    position: relative;
+    width: 220px;
+    height: 180px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* =========================
+   CANDLES
+   ========================= */
+
+.candles {
+    position: absolute;
+
+    z-index: 10;
+
+    bottom: 90px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 125px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+}
+
+.candle {
+    position: relative;
+
+    width: 9px;
+    height: 48px;
+
+    background: white;
+
+    border-radius: 5px;
+}
+
+/* BLACK WICK / BUD */
+
+.candle::before {
+    content: "";
+
+    position: absolute;
+
+    width: 3px;
+    height: 8px;
+
+    background: black;
+
+    border-radius: 2px;
+
+    top: -7px;
+    left: 3px;
+
+    z-index: 11;
+}
+
+/* =========================
+   FLAMES
+   ========================= */
+
+.flame {
+    position: absolute;
+
+    width: 15px;
+    height: 22px;
+
+    background: #fff176;
+
+    border-radius: 50%;
+
+    top: -27px;
+    left: -3px;
+
+    transform: rotate(45deg);
+
+    box-shadow:
+        0 0 8px #fff176,
+        0 0 15px #ffeb3b;
+
+    z-index: 12;
+
+    animation: flicker 0.5s infinite alternate;
+}
+
+@keyframes flicker {
+
+    0% {
+        transform: rotate(40deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(48deg) scale(1.08);
+    }
+
+    100% {
+        transform: rotate(43deg) scale(1.15);
+    }
+}
+
+/* FLAME GOES OUT */
+
+.flame.off {
+    animation: blowOut 0.5s forwards;
+}
+
+@keyframes blowOut {
+
+    0% {
+        opacity: 1;
+        transform: rotate(45deg) scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: rotate(65deg) scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(80deg) scale(0);
+    }
+}
+
+/* =========================
+   CAKE
+   ========================= */
+
+.cake {
+    position: relative;
+
+    width: 150px;
+    height: 90px;
+
+    animation: cakeBounce 2s ease-in-out infinite;
+}
+
+.cake-bottom {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 150px;
+    height: 60px;
+
+    background: #9b654d;
+
+    border-radius: 8px 8px 12px 12px;
+}
+
+.cake-layer {
+    position: absolute;
+
+    bottom: 40px;
+    left: 8px;
+
+    width: 134px;
+    height: 35px;
+
+    background: #c88968;
+
+    border-radius: 8px 8px 4px 4px;
+}
+
+/* =========================
+   CREAM
+   ========================= */
+
+.cream {
+    position: absolute;
+
+    z-index: 3;
+
+    bottom: 70px;
+    left: -5px;
+
+    width: 160px;
+    height: 25px;
+
+    background: white;
+
+    border-radius: 15px;
+}
+
+.cream::before,
+.cream::after {
+    content: "";
+
+    position: absolute;
+
+    background: white;
+
+    width: 20px;
+    height: 35px;
+
+    border-radius: 0 0 15px 15px;
+
+    top: 12px;
+}
+
+.cream::before {
+    left: 25px;
+}
+
+.cream::after {
+    right: 25px;
+}
+
+/* =========================
+   CAKE ANIMATION
+   ========================= */
+
+@keyframes cakeBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* =========================
+   BIRTHDAY MESSAGE
+   ========================= */
+
+.birthday-message {
+    text-align: center;
+    min-height: 70px;
+    padding: 0 16px;
+}
+
+.birthday-text {
+    margin-top: 25px;
+
+    font-size: 20px;
+
+    font-style: italic;
+
+    color: #8d4c5d;
+}
+
+.name {
+    margin-top: 10px;
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    color: #8d4c5d;
+}
+
+/* AFTER CANDLES ARE BLOWN */
+
+.after-blow-message {
+    display: none;
+
+    margin-top: 20px;
+
+    color: white;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    animation: birthdayAppear 1s ease forwards;
+}
+
+@keyframes birthdayAppear {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* HIDE OLD MESSAGE */
+
+.birthday-message.show-after-blow .birthday-text,
+.birthday-message.show-after-blow .name {
+    display: none;
+}
+
+.birthday-message.show-after-blow .after-blow-message {
+    display: block;
+}
+
+/* =========================
+   CONFETTI
+   ========================= */
+
+.confetti-piece {
+    position: fixed;
+    top: -5%;
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 200;
+    animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(105vh) rotate(var(--spin, 360deg));
+        opacity: 0.9;
+    }
+}
+
+/* =========================
+   BUTTON
+   ========================= */
+
+button {
+    margin-top: 30px;
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background: white;
+
+    color: #d96b83;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+}
+
+button:hover:not(:disabled) {
+    transform: scale(1.05);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+button:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+button:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.7);
+    outline-offset: 4px;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 500px) {
+
+    .card {
+        width: 90vw;
+        min-height: 90svh;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .after-blow-message {
+        font-size: 24px;
+    }
+}
+
+.next-arrow {
+    position: fixed;
+    right: clamp(14px, 3vw, 26px);
+    bottom: clamp(14px, 3vw, 26px);
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+    color: #d96b83;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+    animation: arrow-nudge 2.2s ease-in-out infinite;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    z-index: 100;
+}
+
+.next-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+.next-arrow:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.next-arrow:active {
+    transform: scale(0.95);
+}
+
+.next-arrow:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 4px;
+}
+
+@keyframes arrow-nudge {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .card,
+    .flame,
+    .cake,
+    .after-blow-message,
+    button,
+    .next-arrow,
+    .confetti-piece {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .flame.off {
+        opacity: 0;
+    }
+}
